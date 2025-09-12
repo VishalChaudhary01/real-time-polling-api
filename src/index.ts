@@ -1,5 +1,8 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { Env } from './config/env.config';
+import { AppError } from './utils/app-error';
+import { errorHandler } from './middlewares/error-handler';
+import { HttpStatus } from './config/http.config';
 
 const app = express();
 
@@ -8,6 +11,12 @@ const PORT = Env.PORT;
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({ message: 'Healthy Server!' });
 });
+
+app.use((req: Request, _res: Response, _next: NextFunction) => {
+  throw new AppError(`API path ${req.path} not found`, HttpStatus.NOT_FOUND);
+});
+
+app.use(errorHandler);
 
 app.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
