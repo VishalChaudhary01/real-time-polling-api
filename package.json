@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/VishalChaudhary01/real-time-polling-api#readme",
   "dependencies": {
+    "@prisma/client": "^6.16.1",
     "dotenv": "^17.2.2",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "prisma": "^6.16.1"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",

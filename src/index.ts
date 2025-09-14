@@ -3,6 +3,7 @@ import { Env } from './config/env.config';
 import { AppError } from './utils/app-error';
 import { errorHandler } from './middlewares/error-handler';
 import { HttpStatus } from './config/http.config';
+import { connectDatabase } from './config/db.config';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use((req: Request, _res: Response, _next: NextFunction) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`)
-);
+app.listen(PORT, async () => {
+  await connectDatabase();
+  console.log(`Server running at http://localhost:${PORT}`);
+});
