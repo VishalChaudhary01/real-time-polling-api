@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { HttpStatus } from '../config/http.config';
 import { AppError } from '../utils/app-error';
+import { ZodError } from 'zod';
 
 export function errorHandler(
   error: Error,
@@ -13,6 +14,13 @@ export function errorHandler(
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({
       message: error.message,
+    });
+  }
+
+  if (error instanceof ZodError) {
+    const message = error.issues.map((err) => err.message).join(', ');
+    return res.status(HttpStatus.BAD_REQUEST).json({
+      message,
     });
   }
 
