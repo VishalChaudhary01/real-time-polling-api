@@ -29,7 +29,6 @@ model Poll {
   creator     User         @relation(fields: [creatorId], references: [id])
 
   options     PollOption[]
-  Vote Vote[]
 }
 
 
@@ -45,12 +44,10 @@ model PollOption {
 model Vote {
   id       String      @id @default(cuid())
   userId   String
-  pollId   String
   optionId String
 
   user     User        @relation(fields: [userId], references: [id])
-  poll     Poll        @relation(fields: [pollId], references: [id])
   option   PollOption  @relation(fields: [optionId], references: [id])
 
-  @@unique([userId, pollId])
+  @@unique([userId, optionId])
 }
