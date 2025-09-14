@@ -3,7 +3,7 @@ import { prisma } from '../config/db.config';
 import { AppError } from '../utils/app-error';
 import { HttpStatus } from '../config/http.config';
 
-export const getProfile = async (req: Request, res: Response) => {
+export async function getProfile(req: Request, res: Response) {
   const userId = req.userId ?? '';
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -20,4 +20,4 @@ export const getProfile = async (req: Request, res: Response) => {
       email: user.email,
     },
   });
-};
+}
