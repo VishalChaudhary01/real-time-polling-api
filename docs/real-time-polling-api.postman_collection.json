@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "110f111c-225f-4e5d-b20a-27d6fe0166f4",
+    "name": "real-time-polling-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23177151"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "/health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Vishal\",\n  \"email\": \"vishal@example.com\",\n  \"password\": \"Vishal@4321\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/signup",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"vishal@example.com\",\n  \"password\": \"Vishal@4321\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/signin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "signin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/signout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "signout"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Polls",
+      "item": [
+        {
+          "name": "Create Poll",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is your favorite programming language?\",\n  \"isPublished\": true,\n  \"options\": [\n    { \"text\": \"JavaScript\" },\n    { \"text\": \"Python\" },\n    { \"text\": \"Go\" },\n    { \"text\": \"Rust\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/polls",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "polls"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Polls",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/polls",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "polls"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Poll by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/polls/{{pollId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "polls", "{{pollId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Vote",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/polls/{{pollId}}/vote/{{optionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": [
+                "api",
+                "v1",
+                "polls",
+                "{{pollId}}",
+                "vote",
+                "{{optionId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "pollId",
+      "value": "cmfjr8r5p0002w8geea8vz88"
+    },
+    {
+      "key": "optionId",
+      "value": "cmfjr8r5p0003w8gey0w118p5"
+    }
+  ]
+}
