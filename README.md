@@ -12,6 +12,16 @@ It allows users to create polls, vote on options, and receive live updates when 
 
 ## Setup Instructions
 
+## With Docker
+
+```bash
+git clone https://github.com/VishalChaudhary01/real-time-polling-api.git
+cd real-time-polling-api
+cp .env.example .env
+docker-compose up --build
+```
+
+## Manually (without docker)
 ### 1. Clone the Repository
 ```bash
   git clone https://github.com/VishalChaudhary01/real-time-polling-api.git
