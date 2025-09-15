@@ -3,6 +3,7 @@ import { CreatePollDto } from '../validators/poll.validator';
 import { prisma } from '../config/db.config';
 import { AppError } from '../utils/app-error';
 import { HttpStatus } from '../config/http.config';
+import { socketService } from '../services/web-socket.service';
 
 export async function createPoll(req: Request, res: Response) {
   const data: CreatePollDto = req.body;
@@ -50,9 +51,6 @@ export async function getAllPolls(_req: Request, res: Response) {
       question: true,
       creatorId: true,
       createdAt: true,
-      options: {
-        select: { id: true, text: true, _count: { select: { votes: true } } },
-      },
     },
   });
 
@@ -120,6 +118,17 @@ export async function submitVote(req: Request, res: Response) {
       userId,
     },
   });
+  const pollOptions = await prisma.pollOption.findMany({
+    where: { pollId },
+    select: {
+      id: true,
+      text: true,
+      _count: { select: { votes: true } },
+    },
+  });
+
+  // Broadcast to pollId room
+  socketService.broadcastPollUpdate(pollId, pollOptions);
 
   res.status(HttpStatus.OK).json({ message: 'Vote added successfully' });
 }
