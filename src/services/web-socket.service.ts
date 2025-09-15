@@ -1,6 +1,7 @@
 import { WebSocket, WebSocketServer } from 'ws';
 import { Server as HttpServer, IncomingMessage } from 'http';
 import { createClient, RedisClientType } from 'redis';
+import { Env } from '../config/env.config';
 
 export interface PollOption {
   id: string;
@@ -24,8 +25,8 @@ class SocketServer {
   public init(httpServer: HttpServer) {
     this.wss = new WebSocketServer({ server: httpServer });
 
-    this.publisher = createClient();
-    this.subscriber = createClient();
+    this.publisher = createClient({ url: Env.REDIS_URL });
+    this.subscriber = createClient({ url: Env.REDIS_URL });
 
     this.pollChannels = new Map();
 

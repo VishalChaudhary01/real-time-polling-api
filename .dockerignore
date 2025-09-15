@@ -1,0 +1,19 @@
+# Node modules
+node_modules
+
+# Environment files
+.env
+
+# Prisma build artifacts
+prisma/migrations/
+
+# TypeScript build output
+dist
+
+# Postman collection
+docs
+
+# Docker related
+.dockerignore
+Dockerfile
+docker-compose.yml
